@@ -4,6 +4,22 @@ import mongoose from "mongoose";
 const app = express();
 const PORT = 3000;
 
+
+
+//////////////////ROUTES///////////////
+import authRoute from "./routes/auth.js";
+import usersRoute from "./routes/users.js";
+import roomsRoute from "./routes/rooms.js";
+import hotelsRoute from "./routes/hotels.js";
+import userDashboardRoute from "./routes/dahsboard.js"
+
+
+
+
+
+
+
+
 /*
 //database connection
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser:true}());
@@ -46,7 +62,12 @@ console.log('hello')
 
 
 
-
+///////use routes middleware /////////
+app.use("/api/auth", authRoute);
+app.use("/api/user", authRoute);
+app.use("/api/hotels", authRoute);
+app.use("/api/rooms", authRoute);
+app.use("/api/booking", authRoute);
  
 
 app.listen(PORT, ()=>{
