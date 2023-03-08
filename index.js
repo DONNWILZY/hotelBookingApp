@@ -62,10 +62,11 @@ console.log('hello')
 
 
 
-///////use routes middleware /////////
+///////use routes middleware ////////
+app.use(express.json())
 app.use("/api/auth", authRoute);
 app.use("/api/user", authRoute);
-app.use("/api/hotels", authRoute);
+app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", authRoute);
 app.use("/api/booking", authRoute);
  
