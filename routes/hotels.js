@@ -90,21 +90,15 @@ router.get("/:id", async (req, res)=>{
 router.get("/", async (req, res, next)=>{
    
     try{
-        const hotelS = await Hotel.findById( );
+        const hotels = await Hotel.find( );
         res.json({
             status: 200,
-            message: hotelS
+            message: hotels
         })
 
     }catch(err){
        next(err)
     }
 });
-
-
-
-
-
-
 
 export default router
