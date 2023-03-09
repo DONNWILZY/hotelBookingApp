@@ -12,7 +12,8 @@ router.post("/", async (req, res)=>{
         const savedhotel = await newHotel.save();
         res.json({
             status: 200,
-            message: savedhotel
+            message: "successfully Created New Hotel",
+            data: savedhotel
         })
 
     }catch(err){
@@ -27,15 +28,16 @@ router.post("/", async (req, res)=>{
 router.put("/:id", async (req, res)=>{
    
     try{
-        const UpdatedHotel = await Hotel.findByIdAndUpdate(
-            req.params.id, 
-            {$set: req.body},
-            {new: true}
-            );
-        res.json({
+        const updatedHotel = await Hotel.findByIdAndUpdate(
+            req.params.id,
+            { $set: value },
+            { new: true }
+          );
+          res.json({
             status: 200,
-            message: UpdatedHotel
-        })
+            message: `Hotel with ID ${req.params.id} updated`,
+            data: updatedHotel,
+          });
         //catch blog for update
     }catch(err){
         res.json({
@@ -53,7 +55,7 @@ router.delete("/:id", async (req, res)=>{
         await Hotel.findByIdAndDelete(req.params.id);
         res.json({
             status: 200,
-            message: "Hotel deleted succesfully"
+            message: `Hotel with ID:  ${req.params.id} deleted succesfully`
         })
         //catch blog for delete
     }catch(err){
@@ -71,7 +73,8 @@ router.get("/:id", async (req, res)=>{
         const hotel = await Hotel.findById(req.params.id);
         res.json({
             status: 200,
-            message: hotel
+            message: `hotel with this ID(s) ${req.params.id} found`,
+            data: hotel
         })
 
     }catch(err){
@@ -84,19 +87,17 @@ router.get("/:id", async (req, res)=>{
 
 
 ////GET ALL
-router.get("/", async (req, res)=>{
+router.get("/", async (req, res, next)=>{
+   
     try{
-        const hotelS = await Hotel.find();
+        const hotelS = await Hotel.findById( );
         res.json({
             status: 200,
             message: hotelS
         })
 
     }catch(err){
-        res.json({
-            status: 500,
-            message: err
-        })
+       next(err)
     }
 });
 

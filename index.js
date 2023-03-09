@@ -65,11 +65,16 @@ console.log('hello')
 ///////use routes middleware ////////
 app.use(express.json())
 app.use("/api/auth", authRoute);
-app.use("/api/user", authRoute);
+app.use("/api/user", usersRoute);
 app.use("/api/hotels", hotelsRoute);
-app.use("/api/rooms", authRoute);
+app.use("/api/rooms", roomsRoute);
 app.use("/api/booking", authRoute);
- 
+
+
+//error handling middlewre
+app.use((err, res, req, next)=>{
+  res.status(500).json("error is here")
+})
 
 app.listen(PORT, ()=>{
     console.log(`lOCAL Server runnung on PORT ${PORT}`)
