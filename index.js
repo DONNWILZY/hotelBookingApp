@@ -62,6 +62,8 @@ console.log('hello')
 
 
 
+
+
 ///////use routes middleware ////////
 app.use(express.json())
 app.use("/api/auth", authRoute);
@@ -72,9 +74,18 @@ app.use("/api/booking", authRoute);
 
 
 //error handling middlewre
-app.use((err, res, req, next)=>{
-  res.status(500).json("error is here")
+app.use((err, req, res, next)=>{
+    const errorStatus = err.status || 500
+    const errorMessage = err.message || "error occured. try Again!"
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+   
 })
+
 
 app.listen(PORT, ()=>{
     console.log(`lOCAL Server runnung on PORT ${PORT}`)

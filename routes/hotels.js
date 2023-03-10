@@ -1,4 +1,5 @@
 import express from "express";
+import { createError } from "../errormgt/error.js";
 const router = express.Router();
 import Hotel from "../models/Hotels.js";
 
@@ -88,15 +89,15 @@ router.get("/:id", async (req, res)=>{
 
 ////GET ALL
 router.get("/", async (req, res, next)=>{
-   
     try{
-        const hotels = await Hotel.find( );
+        const hotels = await Hotel.findById("1111");
         res.json({
             status: 200,
             message: hotels
         })
 
     }catch(err){
+        console.log(err)
        next(err)
     }
 });
