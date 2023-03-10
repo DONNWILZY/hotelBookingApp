@@ -90,7 +90,7 @@ router.get("/:id", async (req, res)=>{
 ////GET ALL
 router.get("/", async (req, res, next)=>{
     try{
-        const hotels = await Hotel.findById("1111");
+        const hotels = await Hotel.find();
         res.json({
             status: 200,
             message: hotels
