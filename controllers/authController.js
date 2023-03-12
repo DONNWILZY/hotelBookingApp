@@ -1,14 +1,18 @@
 import User from "../models/User.js";
+import bcrypt from "bcryptjs"
+import { createError } from "../errormgt/error.js";
 
 
 ////////// REGISTER AUTH
 export const register = async(req, res, next)=>{
     try{
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(req.body.password)
         const newUser = new User({
             username: req.body.username,
             email: req.body.email,
-            password: req.body.password,
-        })
+            password: hash,
+        });
 
     await newUser.save();
     res.json({
@@ -20,4 +24,24 @@ export const register = async(req, res, next)=>{
         next(err)
     }
 
+}
+
+/////////LOGIN
+export const login = async (req, res, next)=>{
+    try{
+        const user = await User.findOne({username: req.body.username}) 
+        const userEmail = await User.findOne({email: req.body.email}) 
+        if (!user || !userEmail) return next(createError(404, "USER NOT FOUND!"))
+
+        const IsPasswordCoorect = await bcrypt.compare(req.body.password, user.password)
+        if (!IsPasswordCoorect) return next(createError(400, "wrong Password"))
+        res.json({
+            status: 200,
+            message: "logged in successfully",
+            data: user
+        })
+        
+    }catch(err){
+        next(err);
+    }
 }

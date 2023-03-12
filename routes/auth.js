@@ -1,15 +1,13 @@
  import express from "express";
 const router = express.Router()
-import { register } from "../controllers/authController.js";
-import bcrypt from "bcrypt"
+import { login, register } from "../controllers/authController.js";
+import bcrypt from "bcryptjs"
 
 ////// REGISTER
-router.post("/register", register   )
+router.post("/register", register)
 
 ///////SIGNIN
-router.get("/sign", (req, res)=>{
-    
-})
+router.post("/login", login);
 
 //////// VERIFICATION
 router.get("/token", (req, res)=>{

@@ -1,11 +1,13 @@
 import express from "express";
+import { createDashBoard } from "../controllers/dashboardController.js";
 const router = express.Router()
+import Dashboard from "../models/Dashboard.js";
 
 
 
-router.get("/", (req, res)=>{
-    res.send("this is my DASHBOARD")
-})
+
+////dashboard info
+router.post("/update", createDashBoard);
 
 
 

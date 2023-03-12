@@ -71,6 +71,7 @@ app.use("/api/user", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 app.use("/api/booking", authRoute);
+app.use("/user/dashboard", userDashboardRoute)
 
 
 //error handling middlewre
