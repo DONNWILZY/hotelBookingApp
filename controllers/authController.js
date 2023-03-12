@@ -28,17 +28,23 @@ export const register = async(req, res, next)=>{
 
 /////////LOGIN
 export const login = async (req, res, next)=>{
+
     try{
         const user = await User.findOne({username: req.body.username}) 
-        const userEmail = await User.findOne({email: req.body.email}) 
-        if (!user || !userEmail) return next(createError(404, "USER NOT FOUND!"))
+       // const userEmail = await User.findOne({email: req.body.email}) 
+        if (!user) 
+             return next(createError(404, "USER NOT FOUND!"))
 
         const IsPasswordCoorect = await bcrypt.compare(req.body.password, user.password)
-        if (!IsPasswordCoorect) return next(createError(400, "wrong Password"))
+        if (!IsPasswordCoorect)
+            return next(createError(400, "wrong Password"))
+
+            ////////// KEEP PASSWORD & ADMIN STATUS FROM DATABASE
+            const {password, isAdmin, ...otherDetails} = user._doc
         res.json({
             status: 200,
-            message: "logged in successfully",
-            data: user
+            message: `logged in successfully`,
+            data: otherDetails 
         })
         
     }catch(err){
