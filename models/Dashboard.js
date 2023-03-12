@@ -36,6 +36,9 @@ const dashboardSchema = new mongoose.Schema({
 
     },
 
+    kyc:{
+        type: String
+    }
 });
 
 

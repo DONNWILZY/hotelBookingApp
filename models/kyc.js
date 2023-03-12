@@ -35,6 +35,10 @@ const kycSchema = new mongoose.Schema({
         required: true,
     },
 
+    idPhoto:{
+        type: String,
+        required: true,
+    },
 })
 
 

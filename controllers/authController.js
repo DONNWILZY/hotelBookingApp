@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs"
 import { createError } from "../errormgt/error.js";
+import jwt from "jsonwebtoken";
 
 
 ////////// REGISTER AUTH
@@ -39,6 +40,10 @@ export const login = async (req, res, next)=>{
         if (!IsPasswordCoorect)
             return next(createError(400, "wrong Password"))
 
+            /////if password is correct create new web token
+
+            const token = jwt.sign({id:user._id, isAdmin:user.isAdmin}, process.env.JWT_TOKEN)
+
             ////////// KEEP PASSWORD & ADMIN STATUS FROM DATABASE
             const {password, isAdmin, ...otherDetails} = user._doc
         res.json({
@@ -48,6 +53,6 @@ export const login = async (req, res, next)=>{
         })
         
     }catch(err){
-        next(err);
+        next(err); 
     }
 }
