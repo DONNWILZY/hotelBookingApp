@@ -41,17 +41,26 @@ export const login = async (req, res, next)=>{
             return next(createError(400, "wrong Password"))
 
             /////if password is correct create new web token
-
             const token = jwt.sign({id:user._id, isAdmin:user.isAdmin}, process.env.JWT_TOKEN)
 
-            ////////// KEEP PASSWORD & ADMIN STATUS FROM DATABASE
+            ////////// KEEP PASSWORD & ADMIN STATUS FROM DATABASE, WHIE SHOWING OTHER DETAILS
             const {password, isAdmin, ...otherDetails} = user._doc
-        res.json({
+
+           res.cookie("access_token", token, {
+            ////// restricting client request to acces the cooke
+            httpOnly:true
+           }).json({
             status: 200,
-            message: `logged in successfully`,
-            data: otherDetails 
-        })
-        
+            message: "succesfully loggin",
+            data: otherDetails
+           })
+           
+            /*
+        res.cookie("access_token", token, {
+
+        }).status(200).json({...otherDetails})
+        */
+    
     }catch(err){
         next(err); 
     }

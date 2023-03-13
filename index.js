@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 const app = express();
 const PORT = 3000;
+import cookieParser from "cookie-parser";
 
 
 
@@ -12,11 +13,6 @@ import usersRoute from "./routes/users.js";
 import roomsRoute from "./routes/rooms.js";
 import hotelsRoute from "./routes/hotels.js";
 import userDashboardRoute from "./routes/dahsboard.js"
-
-
-
-
-
 
 
 
@@ -66,6 +62,7 @@ console.log('hello')
 
 ///////use routes middleware ////////
 app.use(express.json())
+app.use(cookieParser())
 app.use("/api/auth", authRoute);
 app.use("/api/user", usersRoute);
 app.use("/api/hotels", hotelsRoute);
