@@ -1,4 +1,4 @@
-import Hotel from "../models/User.js";
+//import Hotel from "../models/User.js";
 import User from "../models/User.js";
 
 /////CREATE HOTEL
@@ -23,7 +23,7 @@ export const updateUser = async (req, res, next) =>{
     try{
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
-            { $set: value },
+            { $set: req.body },
             { new: true }
           );
           res.json({
