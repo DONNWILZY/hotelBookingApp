@@ -12,13 +12,26 @@ import { createError } from "../errormgt/error.js";
 import User from "../models/User.js";
 
 ///// verify token
-import { verifyToken } from "../utils/verifyToken.js";
+import { verifyAdmin, verifyToken, verifyUser, verifyVendor } from "../utils/verifyToken.js";
 
-
-router.get("/checkauthentication", verifyToken , (req, res, next)=>{
+/*
+router.get("/checkauthentication", verifyToken, (req, res, next)=>{
     res.send(`hello  you are loggin`);
 })
 
+router.get("/checkuser/:id", verifyUser, (req, res, next)=>{
+    res.send(`hello  you are loggin and can delete account`);
+})
+
+router.get("/checkadmin/:id", verifyAdmin, (req, res, next)=>{
+    res.send(`hello  you are admin`);
+})
+
+router.get("/checkvendor/:id", verifyVendor, (req, res, next)=>{
+    res.send(`hello  you are loggin is hotel owner`);
+})
+
+*/
 ////CREATE NEW HOTEL
 router.post("/", createUser);
 
