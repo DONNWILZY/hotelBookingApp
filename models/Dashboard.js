@@ -39,7 +39,9 @@ const dashboardSchema = new mongoose.Schema({
     kyc:{
         type: String
     }
-});
+},
+{timestamps: true}
+);
 
 
 export default mongoose.model("Dashboard", dashboardSchema)

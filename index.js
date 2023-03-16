@@ -57,9 +57,6 @@ console.log('hello')
 })
 
 
-
-
-
 ///////use routes middleware ////////
 app.use(express.json())
 app.use(cookieParser())

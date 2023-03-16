@@ -3,16 +3,17 @@ import { createHotel, deleteHotel, getAllHotels, getHotel, updateHotel } from ".
 import { createError } from "../errormgt/error.js";
 const router = express.Router();
 import Hotel from "../models/Hotels.js";
+import { verifyAdmin, verifyVendor } from "../utils/verifyToken.js";
 
 
 ////CREATE NEW HOTEL
-router.post("/", createHotel);
+router.post("/", verifyAdmin, verifyVendor, createHotel);
 
 ////UPDATE 
-router.put("/:id", updateHotel);
+router.put("/:id", verifyAdmin, verifyVendor, updateHotel);
 
 /////DELETE
-router.delete("/:id", deleteHotel);
+router.delete("/delete/:id", verifyAdmin, verifyVendor, deleteHotel);
 
 //// GET
 router.get("/:id", getHotel);
