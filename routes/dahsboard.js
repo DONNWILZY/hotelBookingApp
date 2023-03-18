@@ -9,6 +9,15 @@ import Dashboard from "../models/Dashboard.js";
 ////dashboard info
 router.post("/update", createDashBoard);
 
+router.post("/edit", createDashBoard);
+
+router.post("/delete", createDashBoard);
+
+router.post("/viewId", createDashBoard);
+
+router.post("/viewall", createDashBoard);
+
+
 
 
 

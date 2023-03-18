@@ -11,7 +11,6 @@ const dashboardSchema = new mongoose.Schema({
     location:{
         type: String,
         required: true,
-        unique: true
     },
 
     gender:{

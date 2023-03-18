@@ -5,6 +5,7 @@ const kycSchema = new mongoose.Schema({
     nin:{
         type: String,
         required: true,
+        unique: true
     },
     surname:{
         type: String,

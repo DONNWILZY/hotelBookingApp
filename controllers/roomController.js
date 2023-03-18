@@ -7,6 +7,9 @@ import { createError } from "../errormgt/error";
 export const createRoom = async (req, res, next)=>{
     ///// Import Hotel ID
     const hoteld = rq.params.hoteld;
+
+
+    //// CREATE NEW ROOM
     const newRoom = new Room(req.body)
 
     try{
@@ -14,7 +17,7 @@ export const createRoom = async (req, res, next)=>{
         try{
 
         }catch(err){
-
+            next();
         }
     }catch(err){
         next()
