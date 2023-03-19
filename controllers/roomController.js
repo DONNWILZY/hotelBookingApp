@@ -1,6 +1,6 @@
-import Rooms from "../models/Rooms";
-import Hotels from "../models/Hotels";
-import { createError } from "../errormgt/error";
+import Rooms from "../models/Rooms.js";
+import Hotels from "../models/Hotels.js";
+import { createError } from "../errormgt/error.js";
 
 
 
