@@ -15,10 +15,15 @@ export const createRoom = async (req, res, next)=>{
     try{
         const savedRoom = await newRoom.save();
         try{
-
+            await Hotels.findByIdAndUpdate(hoteld, {$push : {rooms: savedRoom._id}})
         }catch(err){
             next();
         }
+        res.json({
+            status: 200,
+            Message: "room added with number",
+            data: savedRoom,
+        })
     }catch(err){
         next()
     }
