@@ -1,12 +1,12 @@
-import Rooms from "../models/Rooms.js";
-import Hotels from "../models/Hotels.js";
+import Room from "../models/Rooms.js";
+import Hotel from "../models/Hotels.js";
 import { createError } from "../errormgt/error.js";
 
 
 
 export const createRoom = async (req, res, next)=>{
     ///// Import Hotel ID
-    const hoteld = rq.params.hoteld;
+    const hoteld = req.params.hotelld;
 
 
     //// CREATE NEW ROOM
