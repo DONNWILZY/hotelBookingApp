@@ -11,7 +11,7 @@ router.post("/:hotelid", verifyAdmin, verifyVendor, createRoom);
 router.put("/:id", verifyAdmin, verifyVendor, updateRoom);
 
 /////DELETE
-router.delete("/delete/:id", verifyAdmin, verifyVendor, deleteRoom);
+router.delete("/:id/:hotelid", verifyAdmin, verifyVendor, deleteRoom);
 
 //// GET
 router.get("/:id", getRoom);

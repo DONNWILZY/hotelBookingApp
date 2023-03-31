@@ -6,7 +6,7 @@ import { createError } from "../errormgt/error.js";
 
 export const createRoom = async (req, res, next)=>{
     ///// Import Hotel ID
-    const hoteld = req.params.hotelid;
+    const hotelId = req.params.hotelid;
 
 
     //// CREATE NEW ROOM
@@ -15,12 +15,12 @@ export const createRoom = async (req, res, next)=>{
     try{
         const savedRoom = await newRoom.save();
         try{
-            await Hotel.findByIdAndUpdate(hoteld, {$push : {rooms: savedRoom._id}})
+            await Hotel.findByIdAndUpdate(hotelId, {$push : {rooms: savedRoom._id}})
         }catch(err){
             next(err); 
         }
         res.json({
-            status: 200,
+            status: 201,
             Message: "room added with number",
             data: savedRoom,
         })
@@ -29,7 +29,7 @@ export const createRoom = async (req, res, next)=>{
     }
 }
 
-////// UPDATE HOTEL
+////// UPDATE ROOM
 export const updateRoom = async (req, res, next) =>{
     try{
         const updatedRoom = await Room.findByIdAndUpdate(
@@ -48,13 +48,21 @@ export const updateRoom = async (req, res, next) =>{
     }
 }
 
-/////DELETE HOTEL
+/////DELETE room
 export const deleteRoom = async (req, res, next) =>{
+    const hotelId = req.params.hotelid;
     try{
         await Room.findByIdAndDelete(req.params.id);
+        try{
+            await Hotel.findByIdAndUpdate(hotelId, {
+                $pull: {rooms: req.params.id},
+            });
+        }catch(err){
+            next(err); 
+        }
         res.json({
             status: 200,
-            message: `Room with ID:  ${req.params.id} deleted succesfully`
+            message: `Room with ID:  deleted succesfully`
         })
         //catch blog for delete
     }catch(err){
