@@ -1,13 +1,12 @@
-
-import Hotel from "../models/Hotels.js";
 import Room from "../models/Rooms.js";
+import Hotel from "../models/Hotels.js";
 import { createError } from "../errormgt/error.js";
 
 
 
 export const createRoom = async (req, res, next)=>{
     ///// Import Hotel ID
-    const hoteld = req.params.hotelld;
+    const hoteld = req.params.hotelid;
 
 
     //// CREATE NEW ROOM
@@ -18,7 +17,7 @@ export const createRoom = async (req, res, next)=>{
         try{
             await Hotel.findByIdAndUpdate(hoteld, {$push : {rooms: savedRoom._id}})
         }catch(err){
-            next(err);
+            next(err); 
         }
         res.json({
             status: 200,
