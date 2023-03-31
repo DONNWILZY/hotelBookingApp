@@ -1,5 +1,6 @@
-import Room from "../models/Rooms.js";
+
 import Hotel from "../models/Hotels.js";
+import Room from "../models/Rooms.js";
 import { createError } from "../errormgt/error.js";
 
 
@@ -15,9 +16,9 @@ export const createRoom = async (req, res, next)=>{
     try{
         const savedRoom = await newRoom.save();
         try{
-            await Hotels.findByIdAndUpdate(hoteld, {$push : {rooms: savedRoom._id}})
+            await Hotel.findByIdAndUpdate(hoteld, {$push : {rooms: savedRoom._id}})
         }catch(err){
-            next();
+            next(err);
         }
         res.json({
             status: 200,
@@ -25,7 +26,7 @@ export const createRoom = async (req, res, next)=>{
             data: savedRoom,
         })
     }catch(err){
-        next()
+        next(err)
     }
 }
 
@@ -66,7 +67,7 @@ export const deleteRoom = async (req, res, next) =>{
 /////// GET HOTEL BY ID
 export const getRoom = async (req, res, next) =>{
     try{
-        const Room = await Room.findById(req.params.id);
+        const room = await Room.findById(req.params.id);
         res.json({
             status: 200,
             message: `hotel with this ID(s) ${req.params.id} found`,
