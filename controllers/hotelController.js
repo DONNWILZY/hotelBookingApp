@@ -81,7 +81,7 @@ export const getAllHotels = async (req, res, next) =>{
 }
 
 
-/////SORT HOTELS
+/////SORT HOTELS by cities
 export const countByCity = async (req, res, next) =>{
     const cities = req.query.cities.split(",")
     try{
@@ -92,6 +92,36 @@ export const countByCity = async (req, res, next) =>{
             status: 200,
             message: list
         })
+
+    }catch(err){
+        next(err);
+    }
+}
+
+
+/////SORT by type
+export const countByType = async (req, res, next) =>{
+    try{
+       const hotelCount = await Hotel.countDocuments({type: "hotel"})
+       const apartmentCount = await Hotel.countDocuments({type: "apartment"})
+       const resortCount = await Hotel.countDocuments({type: "resort"})
+       const villaCount = await Hotel.countDocuments({type: "villa"})
+       const cabinCount = await Hotel.countDocuments({type: "cabin"})
+       const tentCount = await Hotel.countDocuments({type: "tent"})
+
+       res.json({
+        status: 200,
+        message: "RESULTS",
+        data: [
+            {type: "hotel", count: hotelCount},
+            {type: "apartments", count: apartmentCount},
+            {type: "resorts", count: resortCount},
+            {type: "villas", count:villaCount},
+            {type: "cabins", count: cabinCount},
+            {type: "tents", count: tentCount}
+        ]
+       })
+
 
     }catch(err){
         next(err);
