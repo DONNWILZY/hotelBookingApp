@@ -27,4 +27,6 @@ router.get("/countByCity", countByCity);
 //ount by type
 router.get("/countByType", countByType);
 
+router.get("/room/:id", );
+
 export default router
