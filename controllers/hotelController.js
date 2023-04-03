@@ -87,8 +87,7 @@ export const countByCity = async (req, res, next) =>{
     try{
         const list = await Promise.all(cities.map(city=>{
             return Hotel.countDocuments({city:city})
-
-        }))
+        }));
         res.json({
             status: 200,
             message: list
