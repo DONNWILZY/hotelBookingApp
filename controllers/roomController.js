@@ -99,3 +99,22 @@ export const getAllRooms = async (req, res, next) =>{
         next(err);
     }
 }
+
+////// UPDATE ROOM AVAIL
+export const updateRoomAvailability = async (req, res, next) =>{
+    try{
+        const updatedRoom = await Room.findByIdAndUpdate(
+            req.params.id,
+            { $set: req.body},
+            { new: true }
+          );
+          res.json({
+            status: 200,
+            message: `Room with ID ${req.params.id} updated`,
+            data: updatedRoom,
+          });
+        //catch blog for update
+    }catch(err){
+        next(err);
+    }
+}
