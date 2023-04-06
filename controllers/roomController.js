@@ -100,22 +100,51 @@ export const getAllRooms = async (req, res, next) =>{
     }
 }
 
-////// UPDATE ROOM AVAIL
+
+
 export const updateRoomAvailability = async (req, res, next) =>{
     try{
-        await Room.findOne({"roomNumbers._id": req.params.id}, {
-        $push: {
-            "roomNumbers.$.unavailableDates": req.body.dates
-        }
-        })
+        const updatedRoomAvailability = await Room.findOneAndUpdate(
+            {"roomNumbers._id": req.params.id}, 
+            {$push: {"roomNumbers.$.unavailableDates": req.body.dates}},
+            {new: true}
+        );
         
           res.json({
             status: 200,
-            message: `Room  date with ID updated`,
-            data: updateRoomAvailability,
+            message: `Room date with ID ${req.params.id} updated`,
+            data: updatedRoomAvailability,
+           // data: updatedRoom,
+          });
+        //catch block for update
+
+        console.log(updatedRoomAvailability)
+    }catch(err){
+        next(err);
+    }
+}
+
+
+
+/*
+////// UPDATE ROOM AVAIL
+export const updateRoomAvailability = async (req, res, next) =>{
+    try{
+        await Room.findOne(
+            {"roomNumbers._id": req.params.id}, 
+            {
+        $push: {
+            "roomNumbers.$.unavailableDates": req.body.dates
+        }
+        });
+        
+          res.json({
+            status: 200,
+            message: `Room  date with ID updated`
           });
         //catch blog for update
     }catch(err){
         next(err);
     }
 }
+*/
