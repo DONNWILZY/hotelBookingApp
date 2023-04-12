@@ -113,12 +113,10 @@ export const updateRoomAvailability = async (req, res, next) =>{
           res.json({
             status: 200,
             message: `Room date with ID ${req.params.id} updated`,
-            data: updatedRoomAvailability,
-           // data: updatedRoom,
+           // data: updatedRoomAvailability,
+          
           });
         //catch block for update
-
-        console.log(updatedRoomAvailability)
     }catch(err){
         next(err);
     }
