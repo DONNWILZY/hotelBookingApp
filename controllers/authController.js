@@ -10,8 +10,9 @@ export const register = async(req, res, next)=>{
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password)
         const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
+           ...req.body,
+           // username: req.body.username,
+           // email: req.body.email,
             password: hash,
         });
 
@@ -52,7 +53,7 @@ export const login = async (req, res, next)=>{
            }).json({
             status: 200,
             message: "succesfully loggin",
-            data: otherDetails
+            data: {deatils: {...otherDetails}}
            })
            
             /*
