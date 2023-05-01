@@ -1,6 +1,7 @@
 //import Hotel from "../models/User.js";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import dashboard from "../models/Dashboard";
 
 /////CREATE USER
 export const createUser = async (req, res, next) =>{
