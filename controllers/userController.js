@@ -2,7 +2,7 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-/////CREATE HOTEL
+/////CREATE USER
 export const createUser = async (req, res, next) =>{
     const newUser = new User(req.body)
 
@@ -19,7 +19,7 @@ export const createUser = async (req, res, next) =>{
     }
 }
 
-////// UPDATE HOTEL
+////// UPDATE USER
 export const updateUser = async (req, res, next) =>{
     try{
         const updatedUser = await User.findByIdAndUpdate(
@@ -38,7 +38,7 @@ export const updateUser = async (req, res, next) =>{
     }
 }
 
-/////DELETE HOTEL
+/////DELETE USER
 export const deleteUser = async (req, res, next) =>{
     try{
         await User.findByIdAndDelete(req.params.id);
@@ -68,7 +68,7 @@ export const getUser = async (req, res, next) =>{
     }
 }
 
-/////GET ALL HOTELS
+/////GET ALL USER
 export const getAllUsers = async (req, res, next) =>{
     try{
         const users = await User.find();
